@@ -1,5 +1,5 @@
 import svgPaths from "./svg-c87jl4ino7";
-import imgHumanAiAvatars21 from "../app/assets/a639161e7733fad8f10c9eaba409fcecb9853279.png";
+import imgHumanAiAvatars21 from "../assets/a639161e7733fad8f10c9eaba409fcecb9853279.png";
 
 function Navigation1() {
   return <div className="bg-[#a99bf7] rounded-[5px] shrink-0 size-[10px]" data-name="Navigation" />;
