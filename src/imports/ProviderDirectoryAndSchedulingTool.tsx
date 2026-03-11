@@ -1,8 +1,8 @@
 import svgPaths from "./svg-ul28nf71t1";
-import imgHumanAiAvatars22 from "../app/assets/a639161e7733fad8f10c9eaba409fcecb9853279.png";
-import imgHumanAvatarsUiFaces11 from "../app/assets/a79dee57b62753bb9058cf422eb778a7514fbbc3.png";
-import imgHumanAiAvatars31 from "../app/assets/68e925ea570debe02d3fbad1f2da6b269789b18a.png";
-import imgHumanAiAvatars11 from "../app/assets/67c90a837e44730a31df035a9538c9c84ac81b4f.png";
+import imgHumanAiAvatars22 from "../assets/a639161e7733fad8f10c9eaba409fcecb9853279.png";
+import imgHumanAvatarsUiFaces11 from "../assets/a79dee57b62753bb9058cf422eb778a7514fbbc3.png";
+import imgHumanAiAvatars31 from "../assets/68e925ea570debe02d3fbad1f2da6b269789b18a.png";
+import imgHumanAiAvatars11 from "../assets/67c90a837e44730a31df035a9538c9c84ac81b4f.png";
 
 function Container2() {
   return (
