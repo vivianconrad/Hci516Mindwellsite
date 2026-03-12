@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Search, Calendar, DollarSign, MapPin, ChevronDown } from "lucide-react";
-import imgSarah from "../../assets/a639161e7733fad8f10c9eaba409fcecb9853279.png";
-import imgMarcus from "../../assets/a79dee57b62753bb9058cf422eb778a7514fbbc3.png";
-import imgAmara from "../../assets/68e925ea570debe02d3fbad1f2da6b269789b18a.png";
-import imgJamie from "../../assets/67c90a837e44730a31df035a9538c9c84ac81b4f.png";
+import imgSarah from "@/assets/a639161e7733fad8f10c9eaba409fcecb9853279.png";
+import imgMarcus from "@/assets/a79dee57b62753bb9058cf422eb778a7514fbbc3.png";
+import imgAmara from "@/assets/68e925ea570debe02d3fbad1f2da6b269789b18a.png";
+import imgJamie from "@/assets/67c90a837e44730a31df035a9538c9c84ac81b4f.png";
 
 const providers = [
   {
