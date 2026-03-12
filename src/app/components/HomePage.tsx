@@ -1,56 +1,54 @@
 import { Link } from "react-router";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Heart, Brain, Users, Shield, ArrowRight, CheckCircle } from "lucide-react";
+import { CheckCircle, ArrowRight, Shield, Lock, XCircle } from "lucide-react";
 
-const heroImage = "https://images.unsplash.com/photo-1758274526671-ad18176acb01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZWFjZWZ1bCUyMG5hdHVyZSUyMG1lZGl0YXRpb24lMjB3ZWxsbmVzc3xlbnwxfHx8fDE3NzMxNjMxMjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
-const journalingImage = "https://images.unsplash.com/photo-1558086478-d632ccc5a833?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGpvdXJuYWxpbmclMjBzZWxmJTIwY2FyZSUyMG1vcm5pbmd8ZW58MXx8fHwxNzczMTYzMTI4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
-const groupImage = "https://images.unsplash.com/photo-1555069855-e580a9adbf43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwZ3JvdXAlMjB0aGVyYXB5JTIwc3VwcG9ydCUyMGNpcmNsZXxlbnwxfHx8fDE3NzMwOTEzNTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
-
-const services = [
+const steps = [
   {
-    icon: Brain,
-    title: "Self-Assessment Tool",
-    description: "Identify emotional and behavioral patterns with our private, non-diagnostic check-in tool.",
-    link: "/assessment",
-    linkText: "Take Assessment",
+    number: "01",
+    label: "Recurring Assess",
+    title: "Understand how you feel.",
+    description:
+      "Use our self-assessment tool to surface how you've been doing — even when looking fine on the outside.",
   },
   {
-    icon: Users,
-    title: "Find a Provider",
-    description: "Search our curated directory of licensed mental health professionals who match your needs.",
-    link: "/providers",
-    linkText: "Browse Providers",
+    number: "02",
+    label: "AI-Powered Collaboration",
+    title: "See your results clearly.",
+    description:
+      "Receive a structured, private summary of your emotional patterns — with plain-language guidance, not diagnostic labels.",
   },
   {
-    icon: Heart,
-    title: "Resources & Guides",
-    description: "Access evidence-based articles, coping strategies, and wellness tools at your own pace.",
-    link: "/resources",
-    linkText: "Explore Resources",
+    number: "03",
+    label: "AI Research & Search",
+    title: "Find your provider match.",
+    description:
+      "Browse a verified directory of providers filtered by identity, specialty, language, and insurance — no outdated listings, no dead ends.",
   },
   {
-    icon: Shield,
-    title: "Privacy First",
-    description: "Your data stays yours. We never share your personal information without explicit consent.",
-    link: "/about",
-    linkText: "Learn More",
+    number: "04",
+    label: "AI Scheduling",
+    title: "Book without the friction.",
+    description:
+      "Schedule asynchronously, view transparent cost information upfront, and confirm in under 3 minutes.",
   },
 ];
 
 const testimonials = [
   {
-    quote: "MindWell helped me realize I wasn't alone. The self-assessment gave me the clarity I needed to finally reach out for help.",
-    name: "Alex R.",
+    quote:
+      "I kept putting it off for months. Having the assessment tell me what I already felt — but validated — was what finally pushed me to search for someone.",
+    name: "Jamie S.",
     role: "MindWell User",
   },
   {
-    quote: "Finding a therapist who truly understands my background was so easy with the provider directory. I'm grateful.",
-    name: "Priya S.",
-    role: "MindWell User",
+    quote:
+      "The filter for LGBTQ+-affirming providers was the reason I actually found someone I trusted. That never existed anywhere else I looked.",
+    name: "Marcus T.",
+    role: "LGBTQ+ community member",
   },
   {
-    quote: "The resources section became my go-to during tough weeks. It's like having a supportive friend available 24/7.",
-    name: "Jordan M.",
+    quote:
+      "I booked at midnight because I finally had the energy to do it. The fact that it wasn't business-hours-only is the whole reason I got in.",
+    name: "Priya N.",
     role: "MindWell User",
   },
 ];
@@ -60,156 +58,305 @@ export function HomePage() {
     <div className="bg-[#fffcf2] min-h-screen font-['DM_Sans',sans-serif]">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bg-[#e6eaff] blur-[80px] rounded-full w-[600px] h-[600px] -top-[200px] -right-[100px] opacity-60" />
-          <div className="absolute bg-[#a99bf7] blur-[100px] rounded-full w-[400px] h-[400px] bottom-0 left-[10%] opacity-20" />
-        </div>
-        <div className="max-w-[1400px] mx-auto px-6 pt-20 pb-24 relative">
+        <div className="max-w-[1400px] mx-auto px-6 pt-16 pb-20 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="font-[600] text-[12px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
-                Your mental health matters
-              </p>
               <h1 className="font-[600] text-[48px] leading-[56px] text-[#2b2675] mb-6">
-                A safe space to understand yourself better.
+                Getting help starts with one honest moment.
               </h1>
-              <p className="font-normal text-[18px] leading-[30px] text-[rgba(43,38,117,0.72)] mb-10 max-w-[500px]">
-                MindWell offers free self-assessment tools, a curated provider directory, and 
-                evidence-based resources to support your mental health journey.
+              <p className="font-normal text-[16px] leading-[27.2px] text-[rgba(43,38,117,0.72)] mb-8 max-w-[480px]">
+                MindWell connects you with vetted mental health providers and
+                helps you understand how you're feeling — no referral, no
+                jargon, no runaround.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 mb-8">
                 <Link
                   to="/assessment"
-                  className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[15px] rounded-full px-8 py-4 no-underline shadow-[0px_4px_14px_0px_rgba(169,155,247,0.35)] hover:bg-[#9585e0] transition-colors inline-flex items-center gap-2"
+                  className="border-2 border-[#2b2675] text-[#2b2675] font-[600] text-[15px] rounded-full px-7 py-3 no-underline hover:bg-[#2b2675] hover:text-[#fffcf2] transition-colors"
                 >
-                  Start Your Check-In
-                  <ArrowRight size={18} />
+                  Take the Self-Assessment
                 </Link>
                 <Link
                   to="/providers"
-                  className="border-2 border-[#2b2675] text-[#2b2675] font-[600] text-[15px] rounded-full px-8 py-4 no-underline hover:bg-[#2b2675] hover:text-[#fffcf2] transition-colors"
+                  className="border-2 border-[#2b2675] text-[#2b2675] font-[600] text-[15px] rounded-full px-7 py-3 no-underline hover:bg-[#2b2675] hover:text-[#fffcf2] transition-colors"
                 >
                   Find a Provider
                 </Link>
               </div>
+              <div className="flex flex-wrap gap-4">
+                {[
+                  { icon: Shield, label: "HIPAA-Compliant" },
+                  { icon: Lock, label: "Privacy-First" },
+                  { icon: XCircle, label: "No Referral Needed" },
+                ].map(({ icon: Icon, label }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-2 text-[rgba(43,38,117,0.65)] text-[13px] font-normal"
+                  >
+                    <Icon size={14} className="text-[#a99bf7]" />
+                    {label}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="relative">
-              <div className="rounded-[24px] overflow-hidden shadow-[0px_16px_48px_0px_rgba(43,38,117,0.12)]">
-                <ImageWithFallback
-                  src={heroImage}
-                  alt="Peaceful nature scene representing mental wellness"
-                  className="w-full h-[420px] object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-[16px] p-5 shadow-[0px_8px_24px_0px_rgba(43,38,117,0.1)]">
-                <div className="flex items-center gap-3">
-                  <div className="bg-[rgba(209,216,78,0.15)] border border-[rgba(209,216,78,0.4)] rounded-full p-2">
-                    <CheckCircle size={20} className="text-[#2b2675]" />
-                  </div>
-                  <div>
-                    <p className="font-[600] text-[14px] text-[#2b2675]">100% Private</p>
-                    <p className="font-normal text-[12px] text-[rgba(43,38,117,0.55)]">Your data never leaves your device</p>
-                  </div>
-                </div>
-              </div>
+            {/* Lavender placeholder rectangle */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="bg-[#e6eaff] rounded-[24px] w-full h-[340px]" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 bg-white/50">
+      {/* How MindWell Works */}
+      <section className="py-20 bg-[#f5f5ff]">
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="font-[600] text-[12px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
-              How We Help
+          <div className="text-center mb-12">
+            <p className="font-[600] text-[11px] tracking-[1.44px] uppercase text-[#a99bf7] mb-3">
+              HOW MINDWELL WORKS
             </p>
-            <h2 className="font-[600] text-[36px] leading-[44px] text-[#2b2675] mb-4">
-              Tools built around your wellbeing
+            <h2 className="font-[600] text-[36px] leading-[44px] text-[#2b2675]">
+              From awareness to appointment,
+              <br />
+              we're with you.
             </h2>
-            <p className="font-normal text-[16px] leading-[27px] text-[rgba(43,38,117,0.72)] max-w-[560px] mx-auto">
-              Everything you need to check in with yourself, find support, and build healthier habits.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            {steps.map((step) => (
               <div
-                key={service.title}
-                className="bg-[#fffcf2] rounded-[24px] p-8 border border-[#e6eaff] hover:shadow-[0px_8px_32px_0px_rgba(43,38,117,0.08)] transition-shadow"
+                key={step.number}
+                className="bg-white rounded-[20px] p-7 border border-[#e6eaff]"
               >
-                <div className="bg-[#e6eaff] rounded-[16px] size-[56px] flex items-center justify-center mb-6">
-                  <service.icon size={24} className="text-[#a99bf7]" />
-                </div>
-                <h3 className="font-[600] text-[18px] text-[#2b2675] mb-3">{service.title}</h3>
-                <p className="font-normal text-[14px] leading-[22px] text-[rgba(43,38,117,0.65)] mb-6">
-                  {service.description}
+                <p className="font-[600] text-[11px] tracking-[1.2px] uppercase text-[#a99bf7] mb-1">
+                  {step.number} · {step.label}
                 </p>
-                <Link
-                  to={service.link}
-                  className="font-[600] text-[13px] text-[#a99bf7] no-underline inline-flex items-center gap-1.5 hover:gap-2.5 transition-all"
-                >
-                  {service.linkText} <ArrowRight size={14} />
-                </Link>
+                <h3 className="font-[600] text-[17px] text-[#2b2675] mb-3 leading-[24px]">
+                  {step.title}
+                </h3>
+                <p className="font-normal text-[13px] leading-[21px] text-[rgba(43,38,117,0.65)]">
+                  {step.description}
+                </p>
               </div>
             ))}
           </div>
+
+          <div className="flex justify-center">
+            <Link
+              to="/assessment"
+              className="bg-[#d1d84e] text-[#2b2675] font-[600] text-[14px] rounded-full px-7 py-3 no-underline hover:brightness-95 transition-all"
+            >
+              No referral required to begin
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-24">
+      {/* Self-Assessment Promo */}
+      <section className="py-20">
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-[24px] overflow-hidden">
-                <ImageWithFallback
-                  src={journalingImage}
-                  alt="Self-care and journaling"
-                  className="w-full h-[280px] object-cover"
-                />
-              </div>
-              <div className="rounded-[24px] overflow-hidden mt-8">
-                <ImageWithFallback
-                  src={groupImage}
-                  alt="Community support"
-                  className="w-full h-[280px] object-cover"
-                />
-              </div>
-            </div>
             <div>
-              <p className="font-[600] text-[12px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
-                Why MindWell
+              <p className="font-[600] text-[11px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
+                SELF-ASSESSMENT TOOL
               </p>
               <h2 className="font-[600] text-[36px] leading-[44px] text-[#2b2675] mb-6">
-                Mental health care should be accessible to everyone.
+                Know where you stand before you take the next step.
               </h2>
               <p className="font-normal text-[16px] leading-[27px] text-[rgba(43,38,117,0.72)] mb-8">
-                We believe that understanding your mental health shouldn't require a diagnosis, 
-                a referral, or a long waiting list. MindWell provides immediate, private tools 
-                to help you check in with yourself and connect with the right support.
+                Our self-assessment is built around the emotional patterns most
+                commonly experienced by young adults navigating a transition
+                period — school, career changes, relationship shifts, or
+                sustained high-functioning stress.
+                <br />
+                <br />
+                It does not produce a diagnosis; it identifies a behavioral
+                snapshot that you can use to reduce the emotional activation
+                energy required to take that first step.
               </p>
-              <div className="flex flex-col gap-4 mb-8">
+              <div className="flex flex-col gap-3 mb-8">
                 {[
-                  "Free, evidence-informed self-assessment",
-                  "Curated directory of diverse providers",
-                  "No account required to get started",
-                  "All data stays private and encrypted",
+                  "Takes under 8 minutes to complete",
+                  "Completely private — your data never leaves the platform without your consent",
+                  "Generates a plain-language summary with no clinical jargon",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <div className="bg-[rgba(209,216,78,0.2)] rounded-full p-1">
-                      <CheckCircle size={16} className="text-[#2b2675]" />
-                    </div>
-                    <p className="font-normal text-[15px] text-[#2b2675]">{item}</p>
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle
+                      size={18}
+                      className="text-[#a99bf7] shrink-0 mt-0.5"
+                    />
+                    <span className="font-normal text-[14px] leading-[22px] text-[#2b2675]">
+                      {item}
+                    </span>
                   </div>
                 ))}
               </div>
               <Link
-                to="/about"
-                className="font-[600] text-[15px] text-[#a99bf7] no-underline inline-flex items-center gap-2 hover:gap-3 transition-all"
+                to="/assessment"
+                className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[15px] rounded-full px-7 py-3 no-underline shadow-[0px_4px_14px_0px_rgba(169,155,247,0.35)] hover:bg-[#9585e0] transition-colors inline-block"
               >
-                Learn more about our mission <ArrowRight size={16} />
+                Start My Assessment
               </Link>
+            </div>
+
+            {/* Mood scale card */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="bg-white rounded-[24px] shadow-[0px_8px_32px_0px_rgba(43,38,117,0.1)] border border-[#e6eaff] p-8 w-full max-w-[380px]">
+                <p className="font-[600] text-[15px] text-[#2b2675] mb-6 text-center">
+                  How have you been feeling this week?
+                </p>
+                <div className="flex justify-between mb-4">
+                  {["😔", "😟", "😐", "🙂", "😊"].map((emoji, i) => (
+                    <button
+                      key={i}
+                      className={`text-[28px] rounded-full w-[52px] h-[52px] flex items-center justify-center transition-all ${
+                        i === 2
+                          ? "bg-[#a99bf7] shadow-[0px_4px_12px_rgba(169,155,247,0.4)]"
+                          : "hover:bg-[#f0eeff]"
+                      }`}
+                    >
+                      {emoji}
+                    </button>
+                  ))}
+                </div>
+                <div className="bg-[#e6eaff] rounded-full h-[6px] w-full mt-2">
+                  <div className="bg-[#a99bf7] h-full rounded-full w-[50%]" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Provider Directory Promo */}
+      <section className="py-20 bg-[#f5f5ff]">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Mock provider directory card */}
+            <div className="bg-white rounded-[20px] border border-[#e6eaff] p-6 shadow-[0px_4px_24px_0px_rgba(43,38,117,0.08)]">
+              <div className="bg-[#f5f5ff] border border-[#e6eaff] rounded-full px-4 py-2 flex items-center gap-2 mb-5">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="rgba(43,38,117,0.4)" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <span className="text-[13px] text-[rgba(43,38,117,0.45)]">Search by specialty, name, or zip code...</span>
+              </div>
+              <div className="mb-4">
+                <p className="font-[600] text-[10px] tracking-[1px] uppercase text-[rgba(43,38,117,0.45)] mb-2">SPECIALTY</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Anxiety & Stress", "Depression", "Life Transitions"].map((s) => (
+                    <span key={s} className="text-[12px] text-[#a99bf7] cursor-pointer hover:text-[#2b2675]">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col gap-3 mt-4">
+                {[
+                  { initials: "DSC", name: "Dr. Sarah Chen", spec: "Anxiety & Life Transitions", badge: "Accepting Patients", badgeColor: "bg-[#e8f5e9] text-[#2e7d32]" },
+                  { initials: "MTL", name: "Marcus Thompson, LCSW", spec: "Depression & LGBTQ+ Issues", badge: "Limited Availability", badgeColor: "bg-[#fff8e1] text-[#f57f17]" },
+                ].map((p) => (
+                  <div key={p.name} className="flex items-center gap-3 bg-[#fffcf2] rounded-[14px] p-3 border border-[#e6eaff]">
+                    <div className="bg-[#e6eaff] rounded-full size-[40px] flex items-center justify-center shrink-0">
+                      <span className="font-[600] text-[10px] text-[#2b2675]">{p.initials}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-[600] text-[13px] text-[#2b2675] truncate">{p.name}</p>
+                      <p className="font-normal text-[11px] text-[rgba(43,38,117,0.55)] truncate">{p.spec}</p>
+                    </div>
+                    <span className={`text-[10px] font-[600] px-2 py-1 rounded-full shrink-0 ${p.badgeColor}`}>{p.badge}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="font-[600] text-[11px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
+                FIND YOUR PROVIDER & SCHEDULE
+              </p>
+              <h2 className="font-[600] text-[36px] leading-[44px] text-[#2b2675] mb-6">
+                Find a provider built for you. Book in minutes.
+              </h2>
+              <p className="font-normal text-[16px] leading-[27px] text-[rgba(43,38,117,0.72)] mb-6">
+                Our provider directory is filtered by the factors that actually
+                matter when finding the right fit — identity, specialty,
+                language, insurance, and availability.
+              </p>
+              <div className="flex flex-col gap-3 mb-8">
+                {[
+                  "Filter by specialty, insurance, and identity fit",
+                  "See transparent pricing and availability upfront",
+                  "Book appointments asynchronously — no phone calls required",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle
+                      size={16}
+                      className="text-[#a99bf7] shrink-0 mt-0.5"
+                    />
+                    <span className="font-normal text-[14px] leading-[22px] text-[#2b2675]">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <Link
+                to="/providers"
+                className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[15px] rounded-full px-7 py-3 no-underline shadow-[0px_4px_14px_0px_rgba(169,155,247,0.35)] hover:bg-[#9585e0] transition-colors inline-block"
+              >
+                Browse Providers
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Educational Workshop Section */}
+      <section className="py-20">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="font-[600] text-[11px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
+                EDUCATIONAL WORKSHOPS & WEBINARS
+              </p>
+              <h2 className="font-[600] text-[36px] leading-[44px] text-[#2b2675] mb-6">
+                Learn to recognize the signs of overwhelm.
+              </h2>
+              {/* Event card */}
+              <div className="bg-white rounded-[20px] border border-[#e6eaff] p-7 shadow-[0px_4px_24px_0px_rgba(43,38,117,0.06)]">
+                <p className="font-[600] text-[12px] text-[rgba(43,38,117,0.55)] mb-1 uppercase tracking-[1px]">
+                  AUG 30th | 2 pm – 3 pm
+                </p>
+                <h3 className="font-[600] text-[18px] text-[#2b2675] mb-3">
+                  Learn to recognize the signs of overwhelm.
+                </h3>
+                <p className="font-normal text-[13px] leading-[21px] text-[rgba(43,38,117,0.65)] mb-5">
+                  This workshop aims to educate young adults on recognizing early
+                  signs of mental health distress, reducing the stigma surrounding
+                  seeking professional help, as well as giving them resources for
+                  finding help.
+                </p>
+                <p className="font-normal text-[13px] leading-[21px] text-[rgba(43,38,117,0.65)] mb-5">
+                  The workshop aims to help students and young professionals:
+                </p>
+                <div className="flex flex-col gap-2.5 mb-6">
+                  {[
+                    "Learn to recognize the signs of burnout, stress, anxiety, and overwhelm",
+                    "Learn how to spot when their coping strategies have outlived their usefulness",
+                    "Learn about the resources of their peers and available resources",
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-2.5">
+                      <CheckCircle size={15} className="text-[#a99bf7] shrink-0 mt-0.5" />
+                      <span className="font-normal text-[13px] leading-[20px] text-[rgba(43,38,117,0.65)]">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <button className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[14px] rounded-full px-6 py-2.5 border-none cursor-pointer hover:bg-[#9585e0] transition-colors">
+                  Register Today
+                </button>
+              </div>
+            </div>
+
+            {/* Illustration placeholder */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="bg-[#e6eaff] rounded-[24px] w-full h-[400px] flex items-center justify-center">
+                <span className="text-[80px]">🤯</span>
+              </div>
             </div>
           </div>
         </div>
@@ -218,53 +365,49 @@ export function HomePage() {
       {/* Testimonials */}
       <section className="py-24 bg-[#2b2675]">
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="font-[600] text-[12px] tracking-[1.44px] uppercase text-[#a99bf7] mb-4">
-              Community
-            </p>
-            <h2 className="font-[600] text-[36px] leading-[44px] text-[#fffcf2]">
-              Stories from our community
+          <div className="text-center mb-14">
+            <h2 className="font-[600] text-[36px] leading-[44px] text-[#fffcf2] mb-4">
+              Built for the moment you finally decide to get help.
             </h2>
+            <p className="font-normal text-[16px] leading-[27px] text-[rgba(255,252,242,0.65)] max-w-[560px] mx-auto">
+              Designed around the real barriers people face when seeking mental
+              health support.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
             {testimonials.map((t) => (
               <div
                 key={t.name}
-                className="bg-[rgba(255,252,242,0.08)] rounded-[24px] p-8 border border-[rgba(255,252,242,0.1)]"
+                className="bg-[rgba(255,252,242,0.06)] rounded-[24px] p-8 border border-[rgba(255,252,242,0.08)]"
               >
-                <p className="font-normal text-[15px] leading-[26px] text-[rgba(255,252,242,0.85)] mb-8 italic">
+                <p className="font-normal text-[14px] leading-[24px] text-[rgba(255,252,242,0.82)] mb-8 italic">
                   "{t.quote}"
                 </p>
                 <div>
                   <p className="font-[600] text-[14px] text-[#fffcf2]">{t.name}</p>
-                  <p className="font-normal text-[12px] text-[rgba(255,252,242,0.5)]">{t.role}</p>
+                  <p className="font-normal text-[12px] text-[rgba(255,252,242,0.45)]">{t.role}</p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bg-[#e6eaff] blur-[80px] rounded-full w-[500px] h-[500px] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 opacity-50" />
-        </div>
-        <div className="max-w-[640px] mx-auto px-6 text-center relative">
-          <h2 className="font-[600] text-[36px] leading-[44px] text-[#2b2675] mb-4">
-            Ready to check in with yourself?
-          </h2>
-          <p className="font-normal text-[16px] leading-[27px] text-[rgba(43,38,117,0.72)] mb-10">
-            Our self-assessment takes about 5 minutes and is completely private. 
-            No account needed.
-          </p>
-          <Link
-            to="/assessment"
-            className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[15px] rounded-full px-10 py-4 no-underline shadow-[0px_4px_14px_0px_rgba(169,155,247,0.35)] hover:bg-[#9585e0] transition-colors inline-flex items-center gap-2"
-          >
-            Begin Self-Assessment <ArrowRight size={18} />
-          </Link>
+          {/* Trust badges */}
+          <div className="flex flex-wrap justify-center gap-8">
+            {[
+              "HIPAA Compliant",
+              "APA Practice Guidelines Aligned",
+              "No Data Sold Ever",
+            ].map((badge) => (
+              <div
+                key={badge}
+                className="flex items-center gap-2 text-[rgba(255,252,242,0.55)] text-[13px] font-normal"
+              >
+                <CheckCircle size={14} className="text-[rgba(255,252,242,0.4)]" />
+                {badge}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -75,9 +75,9 @@ export function AssessmentQuestions() {
               <div key={cat} className="flex items-center gap-3">
                 <div className="relative">
                   <div
-                    className={`rounded-[5px] size-[10px] ${
+                    className={`rounded-full size-[10px] ${
                       isActive
-                        ? "bg-[rgba(209,216,78,0.3)] shadow-[0px_0px_0px_0px_rgba(209,216,78,0.3)]"
+                        ? "bg-[#d1d84e]"
                         : isCompleted
                         ? "bg-[rgba(209,216,78,0.5)]"
                         : "bg-[rgba(255,252,242,0.25)]"

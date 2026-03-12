@@ -106,10 +106,123 @@ export function ProviderProfile() {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("summary");
   const [selectedDate, setSelectedDate] = useState(12);
-  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [bookingStep, setBookingStep] = useState<0 | 1 | 2 | 3 | 4>(0);
+  const [patientType, setPatientType] = useState<"new" | "returning" | null>(null);
+  const [phone, setPhone] = useState("");
 
   const provider = providersData[id || "sarah-chen"] || providersData["sarah-chen"];
   const tabs = ["Summary", "Location", "Reviews", "Insurance"];
+
+  if (bookingStep === 3 || bookingStep === 4) {
+    return (
+      <div className="bg-[#dce3ff] min-h-screen font-['DM_Sans',sans-serif] relative">
+        {/* X button */}
+        <button
+          onClick={() => setBookingStep(0)}
+          className="absolute top-6 left-6 font-[600] text-[20px] text-[#2b2675] bg-transparent border-none cursor-pointer z-10"
+        >
+          ✕
+        </button>
+
+        {/* Main confirmation content */}
+        <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center pb-32">
+          {/* Illustration placeholder */}
+          <div className="text-[100px] mb-2 leading-none select-none">🙆‍♀️</div>
+
+          <h2 className="font-[600] text-[36px] leading-[1.2] text-[#2b2675] mb-3 max-w-[480px]">
+            Congrats on making your first appointment with {provider.name}
+          </h2>
+          <p className="font-[600] text-[16px] text-[#2b2675] mb-1">
+            {["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date(2026, 2, selectedDate).getDay()]}, March {selectedDate}, at {selectedTime || "10:30 am"}
+          </p>
+          <p className="font-normal text-[15px] text-[rgba(43,38,117,0.65)] mb-8">
+            Confirmation was sent to your email
+          </p>
+
+          <div className="flex flex-col items-center gap-2 w-full max-w-[300px]">
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="(xxx) xxx-xxxx"
+              className="w-full border border-[rgba(43,38,117,0.2)] rounded-[10px] px-4 py-3 text-[14px] text-[#2b2675] font-normal bg-white text-center outline-none focus:border-[#a99bf7]"
+            />
+            <p className="font-normal text-[12px] text-[#a99bf7] underline cursor-pointer">
+              for SMS appointment reminders
+            </p>
+            <button className="bg-[#d1d84e] text-[#2b2675] font-[600] text-[14px] rounded-full px-10 py-3 border-none cursor-pointer hover:brightness-95 mt-1">
+              Sign up
+            </button>
+          </div>
+        </div>
+
+        {/* Feedback widget — fixed bottom-right */}
+        {bookingStep === 3 && (
+          <div className="fixed bottom-8 right-8 bg-[#a99bf7] rounded-[20px] p-6 w-[320px] shadow-[0px_8px_32px_rgba(43,38,117,0.2)]">
+            <div className="flex justify-end mb-1">
+              <button
+                onClick={() => setBookingStep(0)}
+                className="text-[rgba(43,38,117,0.7)] text-[13px] font-normal bg-transparent border-none cursor-pointer underline"
+              >
+                Skip
+              </button>
+            </div>
+            <p className="font-[600] text-[15px] text-[#2b2675] text-center mb-4">
+              How do you feel after Scheduling your first appointment?
+            </p>
+            <div className="flex justify-around">
+              {[
+                { emoji: "😊", label: "Excited" },
+                { emoji: "🙂", label: "Satisfied" },
+                { emoji: "😐", label: "Confused" },
+                { emoji: "😒", label: "Disappointed" },
+              ].map(({ emoji, label }) => (
+                <button
+                  key={label}
+                  onClick={() => label === "Confused" && setBookingStep(4)}
+                  className="flex flex-col items-center gap-1 cursor-pointer bg-transparent border-none"
+                >
+                  <span className="text-[32px]">{emoji}</span>
+                  <span className="font-normal text-[11px] text-[#2b2675]">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Check-in modal (step 4) — triggered by "Confused" */}
+        {bookingStep === 4 && (
+          <>
+            <div className="fixed inset-0 bg-[rgba(43,38,117,0.5)] z-40" />
+            <div className="fixed bottom-8 right-8 z-50 bg-[#b8aaff] rounded-[24px] p-7 w-[340px] shadow-[0px_8px_32px_rgba(43,38,117,0.3)]">
+              <button
+                onClick={() => setBookingStep(3)}
+                className="font-[600] text-[18px] text-[#2b2675] bg-transparent border-none cursor-pointer mb-3"
+              >
+                ✕
+              </button>
+              <div className="text-center mb-4">
+                <div className="text-[72px] leading-none mb-2">🧘‍♀️</div>
+                <p className="font-[600] text-[18px] text-[#2b2675] leading-[1.3] mb-3">
+                  Its okay to feel overwhelm or even confused after taking the first step
+                </p>
+                <p className="font-normal text-[14px] text-[rgba(43,38,117,0.75)] mb-6">
+                  Visit our next steps page so you can feel confident about your decision
+                </p>
+                <button
+                  onClick={() => setBookingStep(0)}
+                  className="bg-[#2b2675] text-[#fffcf2] font-[600] text-[14px] rounded-full px-8 py-3 border-none cursor-pointer hover:bg-[#1e1a52] transition-colors"
+                >
+                  Get Started
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#fffcf2] min-h-screen font-['DM_Sans',sans-serif]">
@@ -253,23 +366,7 @@ export function ProviderProfile() {
 
           {/* Right Column — Calendar & Booking */}
           <div>
-            {bookingConfirmed ? (
-              <div className="bg-white rounded-[24px] p-8 border border-[#e6eaff] shadow-[0px_4px_16px_0px_rgba(43,38,117,0.07)] text-center">
-                <div className="bg-[rgba(209,216,78,0.15)] rounded-full size-[64px] flex items-center justify-center mx-auto mb-4">
-                  <Calendar size={28} className="text-[#2b2675]" />
-                </div>
-                <h3 className="font-[600] text-[20px] text-[#2b2675] mb-2">Appointment Requested</h3>
-                <p className="font-normal text-[14px] text-[rgba(43,38,117,0.65)] mb-6">
-                  Your appointment request with {provider.name} has been submitted. You'll receive a confirmation shortly.
-                </p>
-                <Link
-                  to="/providers"
-                  className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[14px] rounded-full px-6 py-3 no-underline inline-block hover:bg-[#9585e0] transition-colors"
-                >
-                  Back to Directory
-                </Link>
-              </div>
-            ) : (
+            {false ? null : (
               <>
                 {/* Calendar */}
                 <div className="bg-white rounded-[24px] p-6 border border-[#e6eaff] shadow-[0px_4px_16px_0px_rgba(43,38,117,0.07)] mb-6">
@@ -331,7 +428,12 @@ export function ProviderProfile() {
                     {provider.timeSlots.map((time: string) => (
                       <button
                         key={time}
-                        className="bg-transparent border border-[#a99bf7] text-[#a99bf7] font-[600] text-[12px] rounded-full px-4 py-2 cursor-pointer hover:bg-[#a99bf7] hover:text-[#fffcf2] transition-colors"
+                        onClick={() => setSelectedTime(time === selectedTime ? null : time)}
+                        className={`font-[600] text-[12px] rounded-full px-4 py-2 cursor-pointer border transition-colors ${
+                          selectedTime === time
+                            ? "bg-[#a99bf7] border-[#a99bf7] text-[#fffcf2]"
+                            : "bg-transparent border-[#a99bf7] text-[#a99bf7] hover:bg-[#a99bf7] hover:text-[#fffcf2]"
+                        }`}
                       >
                         {time}
                       </button>
@@ -341,7 +443,7 @@ export function ProviderProfile() {
 
                 {/* Book Button */}
                 <button
-                  onClick={() => setBookingConfirmed(true)}
+                  onClick={() => setBookingStep(1)}
                   className="w-full h-[48px] rounded-full bg-[#a99bf7] text-[#fffcf2] font-[600] text-[14px] border-none cursor-pointer shadow-[0px_4px_12px_0px_rgba(169,155,247,0.35)] hover:bg-[#9585e0] transition-colors"
                 >
                   Book Appointment
@@ -351,6 +453,132 @@ export function ProviderProfile() {
           </div>
         </div>
       </div>
+
+      {/* ── Booking Modal: Step 1 — New or Returning ── */}
+      {bookingStep === 1 && (
+        <div className="fixed inset-0 bg-[rgba(43,38,117,0.4)] z-50 flex items-center justify-center p-4">
+          <div className="bg-[#eeeaff] rounded-[24px] w-full max-w-[540px] p-10 relative text-center">
+            <button
+              onClick={() => setBookingStep(0)}
+              className="absolute top-5 left-6 font-[600] text-[18px] text-[#2b2675] bg-transparent border-none cursor-pointer"
+            >
+              ✕
+            </button>
+            <div className="text-[80px] mb-4">🏃‍♀️</div>
+            <h2 className="font-[600] text-[20px] text-[#2b2675] mb-2">Almost there!</h2>
+            <p className="font-[600] text-[22px] text-[#2b2675] mb-8">
+              Are you a new or returning patient?
+            </p>
+            <div className="flex items-center justify-center gap-6">
+              <button
+                onClick={() => { setPatientType("new"); setBookingStep(2); }}
+                className="bg-[#a99bf7] text-[#fffcf2] font-[600] text-[16px] rounded-full px-10 py-3 border-none cursor-pointer hover:bg-[#9585e0] transition-colors"
+              >
+                New
+              </button>
+              <span className="font-normal text-[15px] text-[rgba(43,38,117,0.55)]">or</span>
+              <button
+                onClick={() => { setPatientType("returning"); setBookingStep(2); }}
+                className="bg-[#2b2675] text-[#fffcf2] font-[600] text-[16px] rounded-full px-10 py-3 border-none cursor-pointer hover:bg-[#1e1a52] transition-colors"
+              >
+                Returning
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Booking Modal: Step 2 — Date & Time ── */}
+      {bookingStep === 2 && (
+        <div className="fixed inset-0 bg-[rgba(43,38,117,0.4)] z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[24px] w-full max-w-[580px] p-8 relative">
+            <button
+              onClick={() => setBookingStep(1)}
+              className="absolute top-5 left-6 font-[600] text-[18px] text-[#2b2675] bg-transparent border-none cursor-pointer"
+            >
+              ✕
+            </button>
+            <div className="text-center mb-6">
+              <h2 className="font-[600] text-[22px] text-[#2b2675] mb-1">Welcome!</h2>
+              <p className="font-[600] text-[18px] text-[#2b2675]">
+                Let's get you started with a phone screening with{" "}
+                {provider.name.replace(/^Dr\. /, "Dr. ").split(" ")[0] === "Dr." ? provider.name : `Dr. ${provider.name.split(" ").slice(-1)[0]}`}
+              </p>
+            </div>
+
+            {/* Date strip */}
+            <p className="font-[600] text-[13px] text-[#a99bf7] text-center mb-3">Next Available Dates</p>
+            <div className="bg-[#f0eeff] rounded-[16px] flex justify-around px-4 py-3 mb-6">
+              {[9, 10, 11, 12, 13, 14, 15].map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setSelectedDate(d)}
+                  className={`size-[36px] rounded-full font-normal text-[14px] border-none cursor-pointer transition-all ${
+                    selectedDate === d
+                      ? "bg-[#a99bf7] text-[#fffcf2] shadow-[0px_0px_0px_4px_rgba(169,155,247,0.3)]"
+                      : "bg-transparent text-[#2b2675] hover:bg-[#e6eaff]"
+                  }`}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+
+            {/* Morning slots */}
+            <div className="mb-4">
+              <p className="font-[600] text-[14px] text-[#a99bf7] mb-3">Morning:</p>
+              <div className="flex flex-wrap gap-2">
+                {["9:00 AM", "10:00 AM", "10:30 AM"].map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setSelectedTime(t === selectedTime ? null : t)}
+                    className={`font-normal text-[13px] rounded-full px-5 py-2 border cursor-pointer transition-colors ${
+                      selectedTime === t
+                        ? "bg-[#a99bf7] border-[#a99bf7] text-[#fffcf2]"
+                        : "bg-[#f0eeff] border-transparent text-[#2b2675] hover:border-[#a99bf7]"
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Afternoon slots */}
+            <div className="mb-8">
+              <p className="font-[600] text-[14px] text-[#a99bf7] mb-3">Afternoon</p>
+              <div className="flex flex-wrap gap-2">
+                {["12:30 PM", "1:00 PM", "2:30 PM", "3:30 PM"].map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setSelectedTime(t === selectedTime ? null : t)}
+                    className={`font-normal text-[13px] rounded-full px-5 py-2 border cursor-pointer transition-colors ${
+                      selectedTime === t
+                        ? "bg-[#a99bf7] border-[#a99bf7] text-[#fffcf2]"
+                        : "bg-[#f0eeff] border-transparent text-[#2b2675] hover:border-[#a99bf7]"
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => selectedTime && setBookingStep(3)}
+              disabled={!selectedTime}
+              className={`w-full h-[48px] rounded-full font-[600] text-[14px] border-none cursor-pointer transition-all ${
+                selectedTime
+                  ? "bg-[#a99bf7] text-[#fffcf2] hover:bg-[#9585e0]"
+                  : "bg-[rgba(169,155,247,0.4)] text-[#fffcf2]"
+              }`}
+            >
+              Confirm Appointment
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
