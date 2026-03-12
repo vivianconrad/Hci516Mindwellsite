@@ -111,7 +111,7 @@ export function ProviderProfile() {
   const [patientType, setPatientType] = useState<"new" | "returning" | null>(null);
   const [phone, setPhone] = useState("");
 
-  const provider = providersData[id || "sarah-chen"] || providersData["sarah-chen"];
+  const provider = providersData[id || "sarah-chen"];
   const tabs = ["Summary", "Location", "Reviews", "Insurance"];
 
   if (bookingStep === 3 || bookingStep === 4) {
@@ -120,6 +120,7 @@ export function ProviderProfile() {
         {/* X button */}
         <button
           onClick={() => setBookingStep(0)}
+          aria-label="Close"
           className="absolute top-6 left-6 font-[600] text-[20px] text-[#2b2675] bg-transparent border-none cursor-pointer z-10"
         >
           ✕
@@ -198,6 +199,7 @@ export function ProviderProfile() {
             <div className="fixed bottom-8 right-8 z-50 bg-[#b8aaff] rounded-[24px] p-7 w-[340px] shadow-[0px_8px_32px_rgba(43,38,117,0.3)]">
               <button
                 onClick={() => setBookingStep(3)}
+                aria-label="Close"
                 className="font-[600] text-[18px] text-[#2b2675] bg-transparent border-none cursor-pointer mb-3"
               >
                 ✕
@@ -366,9 +368,7 @@ export function ProviderProfile() {
 
           {/* Right Column — Calendar & Booking */}
           <div>
-            {false ? null : (
-              <>
-                {/* Calendar */}
+            {/* Calendar */}
                 <div className="bg-white rounded-[24px] p-6 border border-[#e6eaff] shadow-[0px_4px_16px_0px_rgba(43,38,117,0.07)] mb-6">
                   <div className="flex items-center justify-between mb-4">
                     <button className="bg-transparent border-none cursor-pointer p-1 text-[#2b2675]">
@@ -393,7 +393,7 @@ export function ProviderProfile() {
                   {daysInMonth.map((week, wi) => (
                     <div key={wi} className="grid grid-cols-7 gap-1">
                       {week.map((day, di) => {
-                        const isCurrentMonth = (wi === 0 && day > 20) || (wi === 5 && day < 10) ? false : true;
+                        const isCurrentMonth = !((wi === 0 && day > 20) || (wi === 5 && day < 10));
                         const isSelected = day === selectedDate && isCurrentMonth;
                         return (
                           <button
@@ -448,8 +448,6 @@ export function ProviderProfile() {
                 >
                   Book Appointment
                 </button>
-              </>
-            )}
           </div>
         </div>
       </div>
@@ -460,6 +458,7 @@ export function ProviderProfile() {
           <div className="bg-[#eeeaff] rounded-[24px] w-full max-w-[540px] p-10 relative text-center">
             <button
               onClick={() => setBookingStep(0)}
+              aria-label="Close"
               className="absolute top-5 left-6 font-[600] text-[18px] text-[#2b2675] bg-transparent border-none cursor-pointer"
             >
               ✕
@@ -494,6 +493,7 @@ export function ProviderProfile() {
           <div className="bg-white rounded-[24px] w-full max-w-[580px] p-8 relative">
             <button
               onClick={() => setBookingStep(1)}
+              aria-label="Close"
               className="absolute top-5 left-6 font-[600] text-[18px] text-[#2b2675] bg-transparent border-none cursor-pointer"
             >
               ✕
@@ -502,7 +502,7 @@ export function ProviderProfile() {
               <h2 className="font-[600] text-[22px] text-[#2b2675] mb-1">Welcome!</h2>
               <p className="font-[600] text-[18px] text-[#2b2675]">
                 Let's get you started with a phone screening with{" "}
-                {provider.name.replace(/^Dr\. /, "Dr. ").split(" ")[0] === "Dr." ? provider.name : `Dr. ${provider.name.split(" ").slice(-1)[0]}`}
+                {provider.name}
               </p>
             </div>
 

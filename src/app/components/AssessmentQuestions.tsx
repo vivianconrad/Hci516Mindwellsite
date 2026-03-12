@@ -39,7 +39,7 @@ const answerOptions = [
 export function AssessmentQuestions() {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<(number | null)[]>(new Array(15).fill(null));
+  const [answers, setAnswers] = useState<(number | null)[]>(new Array(questions.length).fill(null));
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
   const question = questions[currentQuestion];

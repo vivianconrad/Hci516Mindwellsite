@@ -80,7 +80,7 @@ const insightCards = [
 
 export function AssessmentResults() {
   const location = useLocation();
-  const answers = (location.state as any)?.answers as (number | null)[] | undefined;
+  const answers = (location.state as { answers?: (number | null)[] } | null)?.answers;
 
   if (!answers) {
     return <Navigate to="/assessment" replace />;

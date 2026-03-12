@@ -77,6 +77,13 @@ export function ProviderDirectory() {
     setExpandedFilters((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const filteredProviders = searchQuery.trim()
+    ? providers.filter((p) => {
+        const q = searchQuery.toLowerCase();
+        return p.name.toLowerCase().includes(q) || p.specialty.toLowerCase().includes(q);
+      })
+    : providers;
+
   return (
     <div className="bg-[#fffcf2] min-h-screen font-['DM_Sans',sans-serif]">
       <div className="max-w-[1400px] mx-auto px-6 py-8">
@@ -166,12 +173,12 @@ export function ProviderDirectory() {
             </div>
 
             <p className="font-normal text-[14px] text-[rgba(43,38,117,0.65)] mb-6">
-              Showing {providers.length} providers near Chicago, IL
+              Showing {filteredProviders.length} providers near Chicago, IL
             </p>
 
             {/* Provider Grid */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              {providers.map((provider) => (
+              {filteredProviders.map((provider) => (
                 <div
                   key={provider.id}
                   className="bg-[#fffcf2] rounded-[24px] border border-[rgba(0,0,0,0)] shadow-[0px_4px_16px_0px_rgba(43,38,117,0.07)] p-6"
